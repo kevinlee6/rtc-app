@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ConversationsController < ApplicationController
-  before_action :set_conversation, only: [:show, :update, :destroy]
+  before_action :set_conversation, only: %i[show update destroy]
 
   # GET /conversations
   def index
@@ -39,13 +41,14 @@ class ConversationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_conversation
-      @conversation = Conversation.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def conversation_params
-      params.fetch(:conversation, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_conversation
+    @conversation = Conversation.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def conversation_params
+    params.fetch(:conversation, {})
+  end
 end
