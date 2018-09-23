@@ -1,0 +1,39 @@
+/* START GLOBAL */
+body {
+	font-size: 1.2em;
+}
+
+.wrapper {
+	display: flex;
+}
+/* END GLOBAL */
+
+.wrapper > * {
+	padding-top: 2vh;
+	padding-left: 2vw;
+}
+
+/* START NAVBAR */
+.navbar-left {
+	display: flex;
+	flex-direction: column;
+	width: 20vw;
+	height: 100vh;
+	background: lightblue;
+}
+
+.navbar-left > a {
+	color: grey;
+	text-decoration: none;
+	margin: 1vh 0;
+}
+
+.navbar-left > a:hover {
+	color: blue;
+	font-weight: 550;
+}
+
+.navbar-left > .active {
+	color: blue;
+}
+/* END NAVBAR */
