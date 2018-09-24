@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :users
   resources :conversations
   resources :messages
-  mount_devise_token_auth_for 'User', at: 'auth'
-	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-	mount ActionCable.server => '/cable'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+  get '/settings', to: 'users#settings'
+
+
+  mount ActionCable.server => '/cable'
 end

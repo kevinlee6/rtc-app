@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
 class Message < ApplicationRecord
-  has_many :users, through: :conversations
+  belongs_to :user
+  belongs_to :conversation
 end

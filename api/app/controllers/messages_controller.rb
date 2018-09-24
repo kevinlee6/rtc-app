@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-class MessagesController < ApplicationController
+class MessagesController < ApiController
+  before_action :require_login
   before_action :set_message, only: %i[show update destroy]
 
   # GET /messages
   def index
-    @messages = Message.all
+    @messages = current_user.messages || 'There are no messages.'
 
     render json: @messages
   end
@@ -18,9 +19,15 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @message = Message.new(message_params)
+    conversation = Conversation.find(message_params[:conversation_id])
 
     if @message.save
-      render json: @message, status: :created, location: @message
+      # render json: @message, status: :created, location: @message
+      serialized_data = ActiveModelSerializers::Adapter::Json.new(
+        MessageSerializer.new(message)
+      ).serializable_hash
+      MessagesChannel.broadcast_to conversation, serialized_data
+      head :ok
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -49,6 +56,6 @@ class MessagesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def message_params
-    params.fetch(:message, {})
+    params.require(:message).permit(:text, :conversation_id)
   end
 end
