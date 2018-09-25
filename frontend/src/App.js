@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './modules/constants';
 import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom';
@@ -11,42 +11,17 @@ import { Public } from './components/public.jsx';
 import Private from './components/private.jsx';
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
+import { LoginRegister } from "./components/LoginRegister";
 import './App.css';
 
 export class App extends Component {
     constructor() {
         super();
-        this.state = {
+        this.state = ({
             auth: Auth.isUserAuthenticated()
-        }
+        });
 
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
-    }
-
-    handleLoginSubmit(e, data) {
-        e.preventDefault();
-        fetch('/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                user: data
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(res => {
-                if (res) {
-                    Auth.authenticateUser(res.token);
-                    this.setState({
-                        auth: Auth.isUserAuthenticated()
-                    });
-                } else {
-                    // Do something here later
-                }
-            })
-            .catch(err => console.log(err));
     }
 
     handleLogout(e) {
@@ -63,26 +38,6 @@ export class App extends Component {
                 auth: Auth.isUserAuthenticated()
             });
         }).catch(err => console.log(err));
-    }
-
-    handleRegisterSubmit(e, data) {
-        e.preventDefault();
-        fetch('/users', {
-            method: 'POST',
-            body: JSON.stringify({
-                user: data
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(res => {
-                Auth.authenticateUser(res.token);
-                this.setState({
-                    auth: Auth.isUserAuthenticated()
-                });
-            })
-            .catch(err => console.log(err));
     }
 
   render() {
@@ -131,7 +86,7 @@ export class App extends Component {
                     </BrowserRouter>
                 </ActionCableProvider>
             ) : (
-                <Login handleLoginSubmit={this.handleLoginSubmit} />
+                <LoginRegister handleLoginSubmit={this.handleLoginSubmit} />
             )}
         </div>
     );

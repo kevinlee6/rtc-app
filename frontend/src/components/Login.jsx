@@ -38,46 +38,36 @@ export class Login extends Component {
 
     render() {
         return (
-            <div className='before-login-wrapper'>
-                <form
-                    onSubmit={e => this.props.handleLoginSubmit(e, this.state)}
-                    className='login-form'
-                >
-                    <h3>Login to get started</h3>
-                    <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='text'
-                            name='username'
-                            placeholder='Username'
-                            value={this.state.username}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input
-                            className='form-control'
-                            type='password'
-                            name='password'
-                            placeholder='Password'
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+            <form
+                onSubmit={e => this.props.handleLoginSubmit(e, this.state)}
+            >
+                <h3>Login to get started</h3>
+                <div className='form-group'>
                     <input
-                        className='btn btn-primary login-btn'
-                        type='submit'
-                        value='Log In'
+                        className='form-control'
+                        type='text'
+                        name='username'
+                        placeholder='Username'
+                        value={this.state.username}
+                        onChange={this.handleChange}
                     />
-                    <br />
-                    or
-                    <br />
-                    <br />
-                    <a className='btn btn-secondary login-btn' href="/register">
-                        Register
-                    </a>
-                </form>
-            </div>
+                </div>
+                <div className='form-group'>
+                    <input
+                        className='form-control'
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <input
+                    className='btn btn-primary login-btn'
+                    type='submit'
+                    value='Log In'
+                />
+            </form>
         )
     }
 }

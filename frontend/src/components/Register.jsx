@@ -22,7 +22,10 @@ export class Register extends Component {
 
     render() {
         return (
-            <form onSubmit={e => this.props.handleRegisterSubmit(e, this.state)}>
+            <form
+                onSubmit={e => this.props.handleRegisterSubmit(e, this.state)}
+            >
+                <h3>Register today to start messaging!</h3>
                 <div className='form-group'>
                     <input
                         className='form-control'
@@ -54,7 +57,7 @@ export class Register extends Component {
                     />
                 </div>
                 <input
-                    className='btn btn-primary'
+                    className='btn btn-primary login-btn'
                     type='submit'
                     value='Register'
                 />
