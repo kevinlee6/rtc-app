@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ConversationsController < ApiController
-  before_action :require_login
+  # before_action :require_login, except: [:messages]
   before_action :set_conversation, only: %i[show update destroy]
 
   # GET /conversations
@@ -16,6 +16,11 @@ class ConversationsController < ApiController
     render json: @conversation
   end
 
+  def messages
+    @conversation = Conversation.find(params[:conversation_id])
+    render json: @conversation.messages
+  end
+
   # POST /conversations
   def create
     @conversation = Conversation.new(conversation_params)
@@ -23,7 +28,7 @@ class ConversationsController < ApiController
     if @conversation.save
       # render json: @conversation, status: :created, location: @conversation
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
-          ConversationSerializer.new(conversation)
+        ConversationSerializer.new(@conversation)
       ).serializable_hash
       ActionCable.server.broadcast 'conversations_channel', serialized_data
       head :ok

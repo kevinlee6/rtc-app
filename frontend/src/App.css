@@ -3,15 +3,35 @@ body {
 	font-size: 1.2em;
 }
 
-.wrapper {
-	display: flex;
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
 }
 /* END GLOBAL */
 
-.wrapper > * {
+/* AFTER LOGIN WRAPPER START */
+.after-login-wrapper {
+    display: flex;
+}
+
+.after-login-wrapper > * {
 	padding-top: 2vh;
 	padding-left: 2vw;
 }
+/* AFTER LOGIN WRAPPER END */
+
+/* BEFORE LOGIN WRAPPER START */
+.before-login-wrapper {
+    background: #eee url('./media/gif-1.gif') center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    padding: 10vh 25vw;
+    color: white;
+}
+/* BEFORE LOGIN WRAPPER END */
 
 /* START NAVBAR */
 .navbar-left {
@@ -37,3 +57,21 @@ body {
 	color: blue;
 }
 /* END NAVBAR */
+
+/* FORM START */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(233,233,233, 0.2);
+    padding: 20%;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.login-btn {
+    width: 40%;
+}
+/* FORM END */

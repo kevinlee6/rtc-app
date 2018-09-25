@@ -2,7 +2,9 @@
 
 Rails.application.routes.draw do
   resources :users
-  resources :conversations
+  resources :conversations do
+    get '/messages', to: 'conversations#messages'
+  end
   resources :messages
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

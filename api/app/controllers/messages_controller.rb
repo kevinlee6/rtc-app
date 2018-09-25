@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class MessagesController < ApiController
-  before_action :require_login
-  before_action :set_message, only: %i[show update destroy]
+  # before_action :require_login
+  before_action :set_message, only: %i[show update destroroy]
 
   # GET /messages
   def index
@@ -24,7 +24,7 @@ class MessagesController < ApiController
     if @message.save
       # render json: @message, status: :created, location: @message
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        MessageSerializer.new(message)
+        MessageSerializer.new(@message)
       ).serializable_hash
       MessagesChannel.broadcast_to conversation, serialized_data
       head :ok
@@ -56,6 +56,6 @@ class MessagesController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def message_params
-    params.require(:message).permit(:text, :conversation_id)
+    params.require(:message).permit(:text, :conversation_id, :user_id)
   end
 end
