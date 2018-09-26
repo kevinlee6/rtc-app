@@ -61,20 +61,26 @@ export class Public extends Component {
                     />
                 ) : null}
                 <div className="conversations-wrapper">
-                    <h2>Conversations</h2>
+                    <h2 className='headers'>Conversations</h2>
                     <ul className='list-group-flush conversations-container'>
                         {mapConversations(conversations, this.handleClick)}
                     </ul>
                     <NewConversationForm />
                 </div>
-                {activeConversation ? (
+                {activeConversation ?
+                    (
                     <MessagesArea
                         conversation={findActiveConversation(
                             conversations,
                             activeConversation
                         )}
                     />
-                ) : null}
+                    ) :
+                    <div>
+                        <h3>Select a conversation on the left to start chatting!</h3>
+                        <h3>Or create your own.</h3>
+                    </div>
+                }
             </div>
         );
     };

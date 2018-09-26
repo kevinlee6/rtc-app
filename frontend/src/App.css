@@ -15,7 +15,7 @@ li {
     width: 100%;
 }
 
-.public-chat > * {
+.public-chat > *:not(:first-child) {
     padding: 3vh 2vw;
 }
 
@@ -26,6 +26,14 @@ li {
 .center-text {
     display: block;
     text-align: center;
+}
+
+.headers {
+    padding: 10px;
+}
+
+.conversation-title {
+    background: rgba(244, 244, 244, 0.5);
 }
 /* END GLOBAL */
 

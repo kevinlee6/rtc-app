@@ -32,7 +32,7 @@ export class MessagesArea extends Component {
     render() {
         return (
             <div className="messagesArea">
-                <h2>{this.state.title}</h2>
+                <h2 className='headers conversation-title'>{this.state.title}</h2>
                 <ul id='scrollToBottom' className='messages-container'>
                     {orderedMessages(this.state.messages)}
                 </ul>
