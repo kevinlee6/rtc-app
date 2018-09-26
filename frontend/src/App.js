@@ -4,7 +4,7 @@ import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './modules/constants';
 import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from './modules/Auth'
-// import { Navbar } from './components/navbar.jsx';
+import { Navbar } from './components/navbar.jsx';
 import { Profile } from './components/profile.jsx';
 import Home from './components/home.jsx';
 import { Public } from './components/public.jsx';
@@ -47,13 +47,7 @@ export class App extends Component {
                 <ActionCableProvider url={API_WS_ROOT}>
                     <BrowserRouter>
                         <div className='after-login-wrapper'>
-                            <nav className='navbar-left'>
-                                <NavLink to='/profile' activeClassName='active'>Profile</NavLink>
-                                <NavLink exact to='/' activeClassName='active'>Home</NavLink>
-                                <NavLink to='/public' activeClassName='active'>Public chats</NavLink>
-                                <NavLink to='/private' activeClassName='active'>Private chats</NavLink>
-                                <a onClick={this.handleLogout} href='/logout'>Logout</a>
-                            </nav>
+                            <Navbar handleLogout={this.handleLogout} />
                             <div className='main-content'>
                                 <Switch>
                                     <Route path='/profile' component={Profile} />
