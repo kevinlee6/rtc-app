@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './modules/constants';
-import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from './modules/Auth'
 import { Navbar } from './components/navbar.jsx';
 import { Profile } from './components/profile.jsx';

@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { HEADERS } from '../modules/constants.jsx';
+import {Auth} from "../modules/Auth";
 
 export class NewConversationForm extends Component {
-    state = {
-        title: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = ({
+            title: '',
+            privacy: this.props.privacy,
+            username: '',
+            token: Auth.getToken()
+        });
 
-    handleChange = e => {
-        this.setState({ title: e.target.value });
-    };
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        const name = e.target.name;
+        const val = e.target.value;
+        this.setState({
+            [name]: val
+        });
+    }
 
     handleSubmit = e => {
         e.preventDefault()
@@ -17,7 +30,10 @@ export class NewConversationForm extends Component {
             headers: HEADERS,
             body: JSON.stringify(this.state)
         });
-        this.setState({ title: '' });
+        this.setState({
+            title: '',
+            username: ''
+        });
     };
 
     render = () => {
@@ -29,11 +45,24 @@ export class NewConversationForm extends Component {
                     <div className='form-group'>
                         <input
                             type="text"
+                            name='title'
                             value={this.state.title}
                             onChange={this.handleChange}
                             placeholder='Chat Room Title'
                         />
                     </div>
+                    { this.state.privacy ?
+                        <div className='form-group'>
+                            <label htmlFor="privacy">Find user:</label>
+                            <input
+                                type="text"
+                                name='username'
+                                onChange={this.handleChange}
+                                placeholder='Username'
+                                value={this.state.username}
+                            />
+                        </div> : null
+                    }
                     <input type="submit" className='btn btn-secondary' />
                 </form>
             </div>

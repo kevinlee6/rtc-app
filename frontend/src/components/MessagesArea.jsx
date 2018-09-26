@@ -36,7 +36,9 @@ export class MessagesArea extends Component {
                 <ul id='scrollToBottom' className='messages-container'>
                     {orderedMessages(this.state.messages)}
                 </ul>
-                <NewMessageForm conversation_id={this.state.id}/>
+                <NewMessageForm
+                    conversation_id={this.state.id}
+                />
             </div>
         );
     }

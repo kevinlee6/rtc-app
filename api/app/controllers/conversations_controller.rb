@@ -6,20 +6,23 @@ class ConversationsController < ApiController
 
   # GET /conversations
   def index
-    @conversations = Conversation.all
+    @conversations = Conversation.all.where(privacy: false)
 
     render json: @conversations
   end
 
   def subscribed
     user = User.find_by_token!(request.headers[:token])
-    conversations = user.conversations.uniq
+    conversations = user.conversations.where(privacy: false).uniq
 
     render json: conversations
   end
 
   def private
+    user = User.find_by_token!(request.headers[:token])
+    conversations = user.conversations.where(privacy: true).uniq
 
+    render json: conversations
   end
 
   # GET /conversations/1
@@ -34,9 +37,41 @@ class ConversationsController < ApiController
 
   # POST /conversations
   def create
-    @conversation = Conversation.new(conversation_params)
+    @current_user = User.find_by(token: params[:token])
+    changed = {
+      title: conversation_params[:title],
+      privacy: conversation_params[:privacy]
+    }
+    @conversation = Conversation.new(changed)
+    @username = params[:username]
 
     if @conversation.save
+      if @conversation.privacy
+        @user = User.find_by(username: @username)
+        if @user
+          Message.create!(
+            text: 'has started the conversation.',
+            username: @current_user.username,
+            user_id: @current_user.id,
+            conversation_id: @conversation.id
+          )
+          Message.create!(
+            text: 'has joined the conversation.',
+            username: @user.username,
+            user_id: @user.id,
+            conversation_id: @conversation.id
+          )
+        else
+          raise 'Error'
+        end
+      else
+        Message.create!(
+          text: 'has started the conversation.',
+          username: @current_user.username,
+          user_id: @current_user.id,
+          conversation_id: @conversation.id
+        )
+      end
       # render json: @conversation, status: :created, location: @conversation
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
         ConversationSerializer.new(@conversation)
@@ -71,6 +106,6 @@ class ConversationsController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def conversation_params
-    params.require(:conversation).permit(:title)
+    params.require(:conversation).permit(:title, :privacy, :username, :token)
   end
 end

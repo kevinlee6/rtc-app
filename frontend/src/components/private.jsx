@@ -12,7 +12,7 @@ export class Private extends Component {
     };
 
     componentDidMount() {
-        fetch('/subscribed', {
+        fetch('/private', {
             method: 'GET',
             headers: HEADERS
         })
@@ -34,9 +34,11 @@ export class Private extends Component {
 
     handleReceivedConversation = response => {
         const { conversation } = response;
-        this.setState({
-            conversations: [...this.state.conversations, conversation]
-        });
+        if (conversation.privacy) {
+            this.setState({
+                conversations: [...this.state.conversations, conversation]
+            });
+        }
     };
 
     handleReceivedMessage = response => {
@@ -68,7 +70,7 @@ export class Private extends Component {
                     <ul className='list-group-flush conversations-container'>
                         {mapConversations(conversations, this.handleClick)}
                     </ul>
-                    <NewConversationForm />
+                    <NewConversationForm privacy={true} />
                 </div>
                 {activeConversation ?
                     (
