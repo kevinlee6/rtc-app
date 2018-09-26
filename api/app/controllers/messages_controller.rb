@@ -2,7 +2,7 @@
 
 class MessagesController < ApiController
   # before_action :require_login
-  before_action :set_message, only: %i[show update destroroy]
+  before_action :set_message, only: %i[show update destroy]
 
   # GET /messages
   def index
@@ -18,7 +18,14 @@ class MessagesController < ApiController
 
   # POST /messages
   def create
-    @message = Message.new(message_params)
+    user = User.find_by(token: params[:token])
+    new_message_params = {
+      text: message_params[:text],
+      conversation_id: message_params[:conversation_id],
+      user_id: user.id,
+      username: user.username
+    }
+    @message = Message.new(new_message_params)
     conversation = Conversation.find(message_params[:conversation_id])
 
     if @message.save
@@ -56,6 +63,6 @@ class MessagesController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def message_params
-    params.require(:message).permit(:text, :conversation_id, :user_id)
+    params.require(:message).permit(:text, :conversation_id, :token)
   end
 end

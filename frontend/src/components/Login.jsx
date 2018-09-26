@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import gif1 from '../media/gif-1.gif';
 // import gif2 from '../media/gif-2.gif';
 
-
 export class Login extends Component {
     constructor() {
         super();

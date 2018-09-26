@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { API_ROOT, HEADERS } from '../modules/constants.jsx';
+import { Auth } from '../modules/Auth'
 
 export class NewMessageForm extends Component {
     state = {
         text: '',
         conversation_id: this.props.conversation_id,
-        user_id: 1
+        token: Auth.getToken()
     };
 
-    componentWillReceiveProps = nextProps => {
+    componentWillReceiveProps(nextProps) {
         this.setState({
             conversation_id: nextProps.conversation_id
         });
@@ -31,18 +32,17 @@ export class NewMessageForm extends Component {
 
     render = () => {
         return (
-            <div className="newMessageForm">
-                <form onSubmit={this.handleSubmit}>
-                    <label>New Message:</label>
-                    <br />
-                    <input
-                        type="text"
+            <form className="newMessageForm" onSubmit={this.handleSubmit}>
+                <label>New Message:</label>
+                <br />
+                <div className='textbox-and-submit'>
+                    <textarea
                         value={this.state.text}
                         onChange={this.handleChange}
                     />
-                    <input type="submit" />
-                </form>
-            </div>
+                    <input type="submit" className='btn btn-secondary' />
+                </div>
+            </form>
         );
     };
 }

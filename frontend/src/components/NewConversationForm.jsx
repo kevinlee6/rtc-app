@@ -26,12 +26,15 @@ export class NewConversationForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>New Conversation:</label>
                     <br />
-                    <input
-                        type="text"
-                        value={this.state.title}
-                        onChange={this.handleChange}
-                    />
-                    <input type="submit" />
+                    <div className='form-group'>
+                        <input
+                            type="text"
+                            value={this.state.title}
+                            onChange={this.handleChange}
+                            placeholder='Chat Room Title'
+                        />
+                    </div>
+                    <input type="submit" className='btn btn-secondary' />
                 </form>
             </div>
         );

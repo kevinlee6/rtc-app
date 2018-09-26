@@ -11,14 +11,22 @@ export class Public extends Component {
         activeConversation: null
     };
 
-    componentDidMount = () => {
+    componentDidMount() {
         fetch(`${API_ROOT}/conversations`)
             .then(res => res.json())
             .then(conversations => this.setState({ conversations }));
     };
 
-    handleClick = id => {
+    handleClick = (e, id) => {
         this.setState({ activeConversation: id });
+        if (!e.target.classList.contains('.active_conversation')) {
+            const el = document.querySelector('.active-conversation');
+            if (el) {
+                el.classList.remove('active-conversation');
+
+            }
+            e.target.classList.add('active-conversation');
+        }
     };
 
     handleReceivedConversation = response => {
@@ -41,7 +49,7 @@ export class Public extends Component {
     render = () => {
         const { conversations, activeConversation } = this.state;
         return (
-            <div className="conversationsList">
+            <div className="public-chat">
                 <ActionCable
                     channel={{ channel: 'ConversationsChannel' }}
                     onReceived={this.handleReceivedConversation}
@@ -52,9 +60,13 @@ export class Public extends Component {
                         handleReceivedMessage={this.handleReceivedMessage}
                     />
                 ) : null}
-                <h2>Conversations</h2>
-                <ul>{mapConversations(conversations, this.handleClick)}</ul>
-                <NewConversationForm />
+                <div className="conversations-wrapper">
+                    <h2>Conversations</h2>
+                    <ul className='list-group-flush conversations-container'>
+                        {mapConversations(conversations, this.handleClick)}
+                    </ul>
+                    <NewConversationForm />
+                </div>
                 {activeConversation ? (
                     <MessagesArea
                         conversation={findActiveConversation(
@@ -79,7 +91,10 @@ const findActiveConversation = (conversations, activeConversation) => {
 const mapConversations = (conversations, handleClick) => {
     return conversations.map(conversation => {
         return (
-            <li key={conversation.id} onClick={() => handleClick(conversation.id)}>
+            <li key={conversation.id}
+                onClick={(e) => handleClick(e, conversation.id)}
+                className='conversations list-group-item'
+            >
                 {conversation.title}
             </li>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ProtectedRoute } from "./components/ProtectedRoute";
+// import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './modules/constants';
 import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom';
