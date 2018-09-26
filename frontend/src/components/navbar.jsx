@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {Public} from "./public";
+// import {Public} from "./public";
 
 export const Navbar = ({handleLogout}) => (
 	<nav className='navbar-left'>

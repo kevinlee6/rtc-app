@@ -19,7 +19,7 @@ class ConversationsController < ApiController
   end
 
   def private
-    
+
   end
 
   # GET /conversations/1
