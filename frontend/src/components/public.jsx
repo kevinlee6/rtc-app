@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ActionCable } from 'react-actioncable-provider';
-import { API_ROOT } from '../modules/constants.jsx';
 import { NewConversationForm } from './NewConversationForm.jsx';
 import { MessagesArea } from './MessagesArea.jsx';
 import { Cable } from './Cable.jsx';
+import { HEADERS } from "../modules/constants";
 
 export class Public extends Component {
     state = {
@@ -12,7 +12,10 @@ export class Public extends Component {
     };
 
     componentDidMount() {
-        fetch(`${API_ROOT}/conversations`)
+        fetch('/conversations', {
+            method: 'GET',
+            headers: HEADERS
+        })
             .then(res => res.json())
             .then(conversations => this.setState({ conversations }));
     };

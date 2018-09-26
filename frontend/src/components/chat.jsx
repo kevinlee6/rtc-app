@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { API_ROOT, API_WS_ROOT, HEADERS } from '../modules/constants.jsx';
+import { HEADERS } from '../modules/constants.jsx';
 import { ActionCable } from 'react-actioncable-provider';
+import {Auth} from "../modules/Auth";
 
 export class Chat extends Component {
     constructor(props) {
@@ -11,8 +12,11 @@ export class Chat extends Component {
         });
     }
 
-    componentDidMount = () => {
-        fetch(`${API_ROOT}/conversations`)
+    componentDidMount() {
+        fetch('/conversations', {
+            method: 'GET',
+            headers: HEADERS
+        })
             .then(res => res.json())
             .then(conversations => this.setState({ conversations }));
     };

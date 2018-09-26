@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ConversationsController < ApiController
-  # before_action :require_login, except: [:messages]
+  before_action :require_login
   before_action :set_conversation, only: %i[show update destroy]
 
   # GET /conversations
@@ -12,14 +12,14 @@ class ConversationsController < ApiController
   end
 
   # GET /conversations/1
-  def show
-    render json: @conversation
-  end
+  # def show
+  #   render json: @conversation
+  # end
 
-  def messages
-    @conversation = Conversation.find(params[:conversation_id])
-    render json: @conversation.messages
-  end
+  # def messages
+  #   @conversation = Conversation.find(params[:conversation_id])
+  #   render json: @conversation.messages
+  # end
 
   # POST /conversations
   def create

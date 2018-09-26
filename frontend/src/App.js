@@ -8,7 +8,7 @@ import { Auth } from './modules/Auth'
 import Profile from './components/profile.jsx';
 import Home from './components/home.jsx';
 import { Public } from './components/public.jsx';
-import Private from './components/private.jsx';
+import { Private } from './components/private.jsx';
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { LoginRegister } from "./components/LoginRegister";
