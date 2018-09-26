@@ -46,6 +46,7 @@ export class LoginRegister extends Component {
                     this.setState({
                         auth: Auth.isUserAuthenticated()
                     });
+                    localStorage.setItem('username', data['username']);
                     window.location.href = '/'
                 } else {
                     // Do something here later

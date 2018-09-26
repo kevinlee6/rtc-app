@@ -6,7 +6,7 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from './modules/Auth'
 import { Navbar } from './components/navbar.jsx';
 import { Profile } from './components/profile.jsx';
-import Home from './components/home.jsx';
+// import { Home } from './components/home.jsx';
 import { Public } from './components/public.jsx';
 import { Private } from './components/private.jsx';
 import { Register } from "./components/Register";
@@ -34,6 +34,7 @@ export class App extends Component {
             }
         }).then(res => {
             Auth.deauthenticateUser();
+            localStorage.removeItem('username');
             this.setState({
                 auth: Auth.isUserAuthenticated()
             });
@@ -51,7 +52,7 @@ export class App extends Component {
                             <div className='main-content'>
                                 <Switch>
                                     <Route path='/profile' component={Profile} />
-                                    <Route exact path='/' component={Home} />
+                                    <Route exact path='/' component={ Public } />
                                     <Route path='/public' component={Public} />
                                     <Route path='/private' component={Private} />
                                     <Route

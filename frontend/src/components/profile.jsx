@@ -4,9 +4,14 @@ export class Profile extends Component {
     render() {
         return (
             <form className='login-form'>
+                <h3>Account Info</h3>
                 <div className='form-group'>
                     <label htmlFor="username">Username</label>
-                    <input className='form-control' type="text" name='username' disabled/>
+                    <input
+                        className='form-control'
+                        type="text"
+                        value={localStorage.getItem('username')}
+                        name='username' disabled/>
                 </div>
                 <div className='form-group'>
                     <label htmlFor="password">Password</label>
