@@ -28,6 +28,10 @@ li {
     text-align: center;
 }
 
+.toggle {
+    width: 100%;
+}
+
 .headers {
     padding: 10px;
 }
@@ -122,7 +126,7 @@ li {
 }
 
 .conversations-container {
-    height: 65vh;
+    height: 60vh;
     overflow: auto;
 }
 

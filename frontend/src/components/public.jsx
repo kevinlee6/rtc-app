@@ -93,7 +93,7 @@ export class Public extends Component {
                 ) : null}
                 <div className="conversations-wrapper">
                     <h2 className='headers'>Conversations</h2>
-                    <button className='btn btn-secondary' onClick={this.handleToggleActive}>
+                    <button className='btn btn-secondary toggle' onClick={this.handleToggleActive}>
                         {this.state.text}
                     </button>
                     <ul className='list-group-flush conversations-container'>

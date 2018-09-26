@@ -5,7 +5,7 @@ import { API_WS_ROOT } from './modules/constants';
 import { BrowserRouter, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from './modules/Auth'
 // import { Navbar } from './components/navbar.jsx';
-import Profile from './components/profile.jsx';
+import { Profile } from './components/profile.jsx';
 import Home from './components/home.jsx';
 import { Public } from './components/public.jsx';
 import { Private } from './components/private.jsx';

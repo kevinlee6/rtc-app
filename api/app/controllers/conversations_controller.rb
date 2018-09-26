@@ -18,6 +18,10 @@ class ConversationsController < ApiController
     render json: conversations
   end
 
+  def private
+    
+  end
+
   # GET /conversations/1
   # def show
   #   render json: @conversation

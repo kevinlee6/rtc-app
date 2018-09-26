@@ -37,9 +37,7 @@ export class Login extends Component {
 
     render() {
         return (
-            <form
-                onSubmit={e => this.props.handleLoginSubmit(e, this.state)}
-            >
+            <form onSubmit={e => this.props.handleLoginSubmit(e, this.state)}>
                 <h3>Login to get started</h3>
                 <div className='form-group'>
                     <input
