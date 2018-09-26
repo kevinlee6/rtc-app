@@ -32,8 +32,15 @@ class UsersController < ApiController
     }
   end
 
+  def profile
+    p '--------------'
+    pp params
+    p '----------------'
+  end
+
   # PATCH/PUT /users/1
   def update
+    @user = User.find_by_token!(params[:id])
     if @user.update(user_params)
       render json: @user
     else
@@ -55,6 +62,6 @@ class UsersController < ApiController
 
   # Only allow a trusted parameter "white list" through.
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :avatar)
   end
 end

@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :users
+  put 'profile', to: 'users#profile'
   resources :conversations
   get 'subscribed', to: 'conversations#subscribed'
   get 'private', to: 'conversations#private'
