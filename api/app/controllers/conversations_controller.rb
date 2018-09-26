@@ -11,6 +11,13 @@ class ConversationsController < ApiController
     render json: @conversations
   end
 
+  def subscribed
+    user = User.find_by_token!(request.headers[:token])
+    conversations = user.conversations.uniq
+
+    render json: conversations
+  end
+
   # GET /conversations/1
   # def show
   #   render json: @conversation

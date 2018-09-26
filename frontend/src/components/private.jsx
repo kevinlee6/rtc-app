@@ -12,7 +12,7 @@ export class Private extends Component {
     };
 
     componentDidMount() {
-        fetch('/conversations', {
+        fetch('/subscribed', {
             method: 'GET',
             headers: HEADERS
         })

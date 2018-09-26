@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MessagesController < ApiController
-  before_action :require_login
+  # before_action :require_login
   before_action :set_message, only: %i[show update destroy]
 
   # GET /messages

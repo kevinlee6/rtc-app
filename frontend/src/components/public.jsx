@@ -7,6 +7,8 @@ import { HEADERS } from "../modules/constants";
 
 export class Public extends Component {
     state = {
+        active: false,
+        text: 'All',
         conversations: [],
         activeConversation: null
     };
@@ -49,6 +51,32 @@ export class Public extends Component {
         this.setState({ conversations });
     };
 
+    handleToggleActive = () => {
+        if (this.state.active) {
+            fetch('/conversations', {
+                method: 'GET',
+                headers: HEADERS
+            })
+                .then(res => res.json())
+                .then(conversations => this.setState({
+                    conversations,
+                    active: false,
+                    text: 'All'
+                }));
+        } else {
+            fetch('/subscribed', {
+                method: 'GET',
+                headers: HEADERS
+            })
+                .then(res => res.json())
+                .then(conversations => this.setState({
+                    conversations,
+                    active: true,
+                    text: 'Subscribed'
+                }));
+        }
+    };
+
     render = () => {
         const { conversations, activeConversation } = this.state;
         return (
@@ -65,6 +93,9 @@ export class Public extends Component {
                 ) : null}
                 <div className="conversations-wrapper">
                     <h2 className='headers'>Conversations</h2>
+                    <button className='btn btn-secondary' onClick={this.handleToggleActive}>
+                        {this.state.text}
+                    </button>
                     <ul className='list-group-flush conversations-container'>
                         {mapConversations(conversations, this.handleClick)}
                     </ul>

@@ -64,24 +64,25 @@ li {
 	flex-direction: column;
 	width: 20vw;
 	height: 100vh;
-	background: lightblue;
+	background: lightslategray;
     padding-top: 2vh;
     padding-left: 2vw;
 }
 
 .navbar-left > a {
-	color: grey;
+	color: #eee;
 	text-decoration: none;
 	margin: 1vh 0;
 }
 
 .navbar-left > a:hover {
-	color: blue;
+	color: #009;
 	font-weight: 600;
 }
 
 .navbar-left > .active {
-	color: blue;
+	color: #00b;
+    font-weight: 500;
 }
 /* END NAVBAR */
 
@@ -121,7 +122,7 @@ li {
 }
 
 .conversations-container {
-    height: 70vh;
+    height: 65vh;
     overflow: auto;
 }
 
